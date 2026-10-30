@@ -1,0 +1,1975 @@
+<!doctype html>
+<html lang="es-AR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MECO Rent a Car — movilidad para explorar Iguazú con libertad, atención cercana y compromiso con la selva misionera.">
+  <title>MECO Rent a Car | Movete por Iguazú con libertad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      --forest: #3c4938;
+      --cream: #f2f0ec;
+      --terra: #c15422;
+      --terra-dark: #9f421b;
+      --white: #fff;
+      --line: #d9d5cd;
+      --ink: #253024;
+      --muted: #687064;
+      --shadow: 0 18px 50px rgba(39, 50, 39, .12);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Archivo, Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      color: var(--terra);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .section-head {
+      max-width: 700px;
+      margin-bottom: 42px;
+    }
+
+    .section-head h2 {
+      margin: 12px 0 16px;
+      color: var(--forest);
+      font-size: clamp(2rem, 4vw, 3.45rem);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.03rem;
+      margin: 0;
+    }
+
+    .serif {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 400;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .88rem;
+      transition: .25s ease;
+    }
+
+    .btn-primary {
+      background: var(--terra);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(193, 84, 34, .2);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: var(--terra-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(242, 240, 236, .55);
+      color: var(--cream);
+      background: transparent;
+    }
+
+    .btn-ghost:hover,
+    .btn-ghost:focus-visible {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--forest);
+      color: var(--forest);
+      background: transparent;
+    }
+
+    .btn-outline:hover,
+    .btn-outline:focus-visible {
+      background: var(--forest);
+      color: var(--cream);
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(193, 84, 34, .55);
+      outline-offset: 3px;
+    }
+
+
+
+    /* Premium loading screen */
+    body.is-loading {
+      overflow: hidden;
+    }
+
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(193, 84, 34, .10), transparent 34%),
+        var(--forest);
+      color: var(--cream);
+      opacity: 1;
+      visibility: visible;
+      transition: opacity .55s ease, visibility .55s ease;
+    }
+
+    .page-loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .page-loader-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      text-align: center;
+      transform: translateY(-2vh);
+    }
+
+    .page-loader-mark {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+    }
+
+    .page-loader-mark::before,
+    .page-loader-mark::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+
+    .page-loader-mark::before {
+      border: 1px solid rgba(242, 240, 236, .22);
+    }
+
+    .page-loader-mark::after {
+      border: 2px solid transparent;
+      border-top-color: var(--terra);
+      border-right-color: var(--terra);
+      animation: loader-spin 1.15s cubic-bezier(.6, .15, .4, .85) infinite;
+    }
+
+    .page-loader-mark span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--terra);
+      box-shadow: 0 0 0 7px rgba(193, 84, 34, .12);
+    }
+
+    .page-loader-brand {
+      margin: 0;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .28em;
+      text-indent: .28em;
+      text-transform: uppercase;
+    }
+
+    .page-loader-label {
+      margin: -12px 0 0;
+      color: rgba(242, 240, 236, .62);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    @keyframes loader-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page-loader,
+      .page-loader-mark::after {
+        animation: none;
+        transition-duration: .01ms;
+      }
+    }
+
+    /* Topbar */
+    .topbar {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 82px;
+      color: #fff;
+      transition: .3s ease;
+    }
+
+    .topbar.scrolled {
+      background: rgba(60, 73, 56, .97);
+      box-shadow: 0 8px 30px rgba(24, 31, 24, .16);
+    }
+
+    .nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand img {
+      width: 132px;
+      height: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      position: relative;
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .87);
+      white-space: nowrap;
+      transition: color .25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #fff;
+    }
+
+    .nav-links a.active {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -9px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--terra);
+    }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lang {
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: .77rem;
+    }
+
+    .lang option {
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      min-height: 43px;
+      padding: 0 17px;
+      font-size: .76rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      color: #fff;
+      background: transparent;
+      font-size: 1.25rem;
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 760px;
+      display: flex;
+      align-items: end;
+      position: relative;
+      color: var(--cream);
+      background-image:
+        linear-gradient(90deg, rgba(35, 52, 37, .88) 0%, rgba(60, 73, 56, .48) 46%, rgba(60, 73, 56, .16) 100%),
+        url('https://rodrigocintrao.com.br/propostas/meco/01.jpg');
+      background-position: center;
+      background-size: cover;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 250px;
+      background: linear-gradient(transparent, var(--cream));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 170px 0 118px;
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .hero-copy {
+      max-width: 700px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.1rem, 7vw, 6.2rem);
+      line-height: .97;
+      letter-spacing: -.065em;
+      margin: 20px 0 25px;
+    }
+
+    .hero p {
+      max-width: 580px;
+      font-size: 1.14rem;
+      color: rgba(242, 240, 236, .9);
+      margin: 0 0 31px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .scroll-note {
+      position: absolute;
+      z-index: 2;
+      bottom: 30px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--forest);
+      font-size: .75rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .scroll-note i {
+      color: var(--terra);
+      font-size: 1rem;
+    }
+
+    /* Booking */
+    .booking-wrap {
+      position: relative;
+      z-index: 3;
+      margin-top: -1px;
+    }
+
+    .booking {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .booking-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .booking h2 {
+      margin: 7px 0 0;
+      color: var(--forest);
+      font-size: 1.45rem;
+    }
+
+    .booking-note {
+      font-size: .78rem;
+      color: var(--muted);
+      max-width: 310px;
+      text-align: right;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field label {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--forest);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .field input,
+    .field select {
+      height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      padding: 0 13px;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--terra);
+      outline: 2px solid rgba(193, 84, 34, .15);
+    }
+
+    .span-2 {
+      grid-column: span 2;
+    }
+
+    .booking-submit {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .form-status {
+      font-size: .8rem;
+      color: var(--terra);
+      margin: 14px 0 0;
+      display: none;
+    }
+
+    .form-status.show {
+      display: block;
+      text-align: center;
+    }
+
+    /* Benefits */
+    .benefits {
+      padding: 92px 0 100px;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .benefit {
+      background: #fff;
+      padding: 30px;
+      border: 1px solid rgba(217, 213, 205, .7);
+      border-radius: 16px;
+      transition: .25s;
+    }
+
+    .benefit:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .icon-disc {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(193, 84, 34, .12);
+      color: var(--terra);
+      display: grid;
+      place-items: center;
+      font-size: 1.15rem;
+    }
+
+    .benefit h3 {
+      font-size: 1.15rem;
+      color: var(--forest);
+      margin: 23px 0 8px;
+    }
+
+    .benefit p {
+      font-size: .92rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* About */
+    .about {
+      background: #fff;
+      padding: 105px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .image-frame {
+      position: relative;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      border-radius: 20px;
+      display: block;
+    }
+
+    .image-stamp {
+      position: absolute;
+      right: -24px;
+      bottom: 24px;
+      background: var(--terra);
+      color: #fff;
+      border-radius: 50%;
+      width: 124px;
+      height: 124px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 15px;
+      font-size: .7rem;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .about-copy h2 {
+      font-size: clamp(2.3rem, 4vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -.05em;
+      color: var(--forest);
+      margin: 14px 0 21px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .about-copy p strong {
+      color: var(--forest);
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 34px;
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+      padding-top: 25px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 2rem;
+      color: var(--forest);
+      line-height: 1;
+    }
+
+    .stat span {
+      font-size: .76rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 6px;
+    }
+
+    /* Fleet */
+    .fleet {
+      padding: 105px 0;
+    }
+
+    .fleet-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+    }
+
+    .fleet-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 25px 0 22px;
+      flex-wrap: wrap;
+    }
+
+    .fleet-tab {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .fleet-tab.active,
+    .fleet-tab:hover {
+      background: var(--forest);
+      border-color: var(--forest);
+      color: #fff;
+    }
+
+    .fleet-panel {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .fleet-panel.active {
+      display: grid;
+    }
+
+    .fleet-photo {
+      height: 390px;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .fleet-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fleet-info h3 {
+      font-size: 2.1rem;
+      color: var(--forest);
+      margin: 0 0 15px;
+    }
+
+    .fleet-info p {
+      color: var(--muted);
+      max-width: 470px;
+    }
+
+    .specs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 24px 0 28px;
+    }
+
+    .spec {
+      padding: 10px 13px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      font-size: .78rem;
+      color: var(--forest);
+    }
+
+    .fleet-cta {
+      text-align: center;
+      margin-top: 45px;
+    }
+
+    /* Differentials */
+    .differentials {
+      background: var(--forest);
+      color: var(--cream);
+      padding: 105px 0;
+    }
+
+    .differentials .section-head h2 {
+      color: var(--cream);
+    }
+
+    .differentials .section-head p {
+      color: rgba(242, 240, 236, .68);
+    }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+    }
+
+    .diff {
+      border-top: 1px solid rgba(242, 240, 236, .25);
+      padding: 22px 6px 10px;
+    }
+
+    .diff i {
+      color: var(--terra);
+      font-size: 1.1rem;
+    }
+
+    .diff h3 {
+      font-size: 1rem;
+      margin: 15px 0 7px;
+    }
+
+    .diff p {
+      font-size: .84rem;
+      color: rgba(242, 240, 236, .68);
+      margin: 0;
+    }
+
+    .diff-action {
+      margin-top: 40px;
+    }
+
+    /* Experiences */
+    .experiences {
+      padding: 105px 0;
+      background: #fff;
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    .experience-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      min-height: 195px;
+    }
+
+    .experience-card.featured {
+      background: var(--cream);
+      border-color: transparent;
+    }
+
+    .experience-card h3 {
+      font-size: 1.15rem;
+      color: var(--forest);
+      margin: 7px 0 13px;
+    }
+
+    .experience-card p {
+      font-size: .86rem;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+
+    .partner-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .partner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: .76rem;
+      color: var(--forest);
+      background: #fff;
+    }
+
+    .partner:hover {
+      border-color: var(--terra);
+      color: var(--terra);
+    }
+
+    /* Sustainability */
+    .sustain {
+      padding: 110px 0;
+      color: var(--cream);
+      background:
+        linear-gradient(90deg, rgba(46, 63, 47, .94), rgba(60, 73, 56, .67)),
+        url('https://rodrigocintrao.com.br/propostas/meco/09.jpg') center/cover;
+    }
+
+    .sustain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .sustain h2 {
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      line-height: .98;
+      letter-spacing: -.06em;
+      margin: 14px 0 22px;
+    }
+
+    .sustain p {
+      color: rgba(242, 240, 236, .8);
+      max-width: 520px;
+    }
+
+    .sustain-card {
+      border: 1px solid rgba(242, 240, 236, .32);
+      border-radius: 18px;
+      padding: 30px;
+      background: rgba(25, 36, 26, .3);
+      backdrop-filter: blur(8px);
+    }
+
+    .sustain-card i {
+      color: #df9a65;
+      font-size: 1.5rem;
+    }
+
+    .sustain-card h3 {
+      font-size: 1.25rem;
+      margin: 16px 0 8px;
+    }
+
+    .sustain-card p {
+      font-size: .9rem;
+      margin: 0;
+    }
+
+    /* Info */
+    .info {
+      padding: 105px 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 75px;
+    }
+
+    .info-intro h2 {
+      font-size: clamp(2.2rem, 4vw, 3.7rem);
+      line-height: 1;
+      letter-spacing: -.05em;
+      color: var(--forest);
+      margin: 13px 0 18px;
+    }
+
+    .info-intro p {
+      color: var(--muted);
+    }
+
+    .accordion {
+      border-top: 1px solid var(--line);
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      background: transparent;
+      padding: 20px 0;
+      color: var(--forest);
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .accordion-trigger i {
+      color: var(--terra);
+      transition: .25s;
+    }
+
+    .accordion-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: .25s;
+    }
+
+    .accordion-content > div {
+      overflow: hidden;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .accordion-item.open .accordion-content {
+      grid-template-rows: 1fr;
+    }
+
+    .accordion-item.open .accordion-content > div {
+      padding: 0 38px 20px 0;
+    }
+
+    .accordion-item.open .accordion-trigger i {
+      transform: rotate(45deg);
+    }
+
+    /* Final CTA */
+    .final-cta {
+      margin: 0 0 0;
+      padding: 100px 0;
+      background:
+        linear-gradient(90deg, rgba(38, 53, 40, .94), rgba(38, 53, 40, .62)),
+        url('https://rodrigocintrao.com.br/propostas/meco/10.jpg') center/cover;
+      color: var(--cream);
+    }
+
+    .final-cta-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 35px;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: .98;
+      letter-spacing: -.06em;
+      margin: 14px 0 18px;
+      max-width: 640px;
+    }
+
+    .final-cta p {
+      color: rgba(242, 240, 236, .78);
+      max-width: 540px;
+      margin: 0;
+    }
+
+    .final-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* Footer */
+    .footer {
+      background: #283127;
+      color: var(--cream);
+      padding: 65px 0 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 34px;
+    }
+
+    .footer .brand img {
+      width: 144px;
+      margin-bottom: 20px;
+    }
+
+    .footer p,
+    .footer a {
+      font-size: .78rem;
+      color: rgba(242, 240, 236, .65);
+    }
+
+    .footer a:hover {
+      color: #fff;
+    }
+
+    .footer h3 {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--cream);
+      margin: 5px 0 15px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 9px;
+    }
+
+    .footer-links.social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links.social a {
+      font-size: 24px;
+    }
+
+    .contact-line {
+      display: flex;
+      gap: 9px;
+      margin: 9px 0;
+      align-items: center;
+    }
+
+    .contact-line i {
+      color: #d78153;
+    }
+
+    .qr-box {
+      width: 76px;
+      height: 76px;
+      border: 1px solid rgba(242, 240, 236, .4);
+      display: grid;
+      place-items: center;
+      margin-top: 8px;
+      background: repeating-conic-gradient(#f2f0ec 0 25%, #283127 0 50%) 50% / 12px 12px;
+    }
+
+    .qr-box span {
+      background: #283127;
+      color: #f2f0ec;
+      font-weight: 700;
+      font-size: .72rem;
+      padding: 3px;
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(242, 240, 236, .16);
+      margin-top: 42px;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: .72rem;
+      color: rgba(242, 240, 236, .45);
+    }
+
+    /* WhatsApp float */
+    .wa-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 10;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #4e9e64;
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
+      font-size: 1.45rem;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.06);
+    }
+
+    /* Responsive: 1050px */
+    @media (max-width: 1050px) {
+      .nav-links {
+        gap: 13px;
+      }
+
+      .nav-links a {
+        font-size: .7rem;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .booking-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .booking-submit {
+        grid-column: span 2;
+      }
+
+      .fleet-top {
+        display: block;
+      }
+    }
+
+    /* Responsive: 760px */
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 30px, 600px);
+      }
+
+      .topbar,
+      .nav {
+        height: 70px;
+      }
+
+      .brand img {
+        width: 112px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 15px;
+        right: 15px;
+        background: var(--forest);
+        padding: 20px;
+        border-radius: 12px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px 4px;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        font-size: .82rem;
+      }
+
+      .nav-tools {
+        margin-left: auto;
+      }
+
+      .lang {
+        font-size: .7rem;
+      }
+
+      .hero {
+        min-height: 720px;
+        background-position: 60% center;
+      }
+
+      .hero-inner {
+        width: min(100% - 30px, 600px);
+        padding: 130px 0 118px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 15vw, 4.5rem);
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .scroll-note {
+        right: 15px;
+        bottom: 25px;
+        font-size: .65rem;
+      }
+
+      .booking {
+        padding: 23px 18px;
+      }
+
+      .booking-top {
+        display: block;
+      }
+
+      .booking-note {
+        text-align: left;
+        margin-top: 9px;
+      }
+
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .span-2,
+      .booking-submit {
+        grid-column: span 1;
+      }
+
+      .benefits,
+      .about,
+      .fleet,
+      .differentials,
+      .experiences,
+      .info {
+        padding: 76px 0;
+      }
+
+      .benefit-grid,
+      .diff-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid,
+      .fleet-panel,
+      .sustain-grid,
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .image-frame img {
+        height: 390px;
+      }
+
+      .image-stamp {
+        right: -5px;
+      }
+
+      .stat-row {
+        gap: 18px;
+      }
+
+      .stat strong {
+        font-size: 1.55rem;
+      }
+
+      .fleet-photo {
+        height: 290px;
+      }
+
+      .experience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sustain {
+        padding: 80px 0;
+      }
+
+      .sustain-grid {
+        gap: 30px;
+      }
+
+      .final-cta {
+        padding: 78px 0;
+      }
+
+      .final-cta-inner {
+        display: block;
+      }
+
+      .final-actions {
+        justify-content: flex-start;
+        margin-top: 28px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+
+      .footer-grid > div:first-child {
+        grid-column: span 2;
+      }
+
+      .copyright {
+        display: block;
+      }
+
+      .copyright span {
+        display: block;
+        margin-top: 8px;
+      }
+    }
+
+    /* Scroll reveal / premium motion system */
+    .reveal-enabled [data-reveal] {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition: opacity .75s cubic-bezier(.22, 1, .36, 1), transform .75s cubic-bezier(.22, 1, .36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+    .reveal-enabled [data-reveal="left"] { transform: translate3d(-34px, 0, 0); }
+    .reveal-enabled [data-reveal="right"] { transform: translate3d(34px, 0, 0); }
+    .reveal-enabled [data-reveal="scale"] { transform: scale(.965); }
+    .reveal-enabled [data-reveal].is-visible { opacity: 1; transform: none; }
+    .reveal-enabled .image-frame[data-reveal] img,
+    .reveal-enabled .fleet-photo[data-reveal] img {
+      transform: scale(1.045);
+      transition: transform 1.2s cubic-bezier(.22, 1, .36, 1);
+    }
+    .reveal-enabled .image-frame[data-reveal].is-visible img,
+    .reveal-enabled .fleet-photo[data-reveal].is-visible img { transform: scale(1); }
+    .reveal-enabled .section-head[data-reveal] { transition-duration: .85s; }
+    .reveal-enabled .benefit,
+    .reveal-enabled .diff,
+    .reveal-enabled .experience-card,
+    .reveal-enabled .stat,
+    .reveal-enabled .partner { transition-property: opacity, transform, box-shadow, border-color, color; }
+    .reveal-enabled .benefit.is-visible:hover,
+    .reveal-enabled .experience-card.is-visible:hover { transform: translateY(-7px); }
+    .fleet-panel.active { animation: fleet-panel-enter .65s cubic-bezier(.22, 1, .36, 1) both; }
+    @keyframes fleet-panel-enter {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .wa-float { animation: wa-float-in .8s .9s cubic-bezier(.22, 1, .36, 1) both; }
+    @keyframes wa-float-in {
+      from { opacity: 0; transform: translateY(16px) scale(.82); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-enabled [data-reveal],
+      .reveal-enabled [data-reveal].is-visible,
+      .reveal-enabled .image-frame[data-reveal] img,
+      .reveal-enabled .fleet-photo[data-reveal] img,
+      .wa-float,
+      .fleet-panel.active {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+  </style>
+</head>
+<body class="is-loading">
+  <div class="page-loader" id="pageLoader" role="status" aria-live="polite" aria-label="Cargando MECO">
+    <div class="page-loader-inner">
+      <div class="page-loader-mark" aria-hidden="true"><span></span></div>
+      <p class="page-loader-brand">MECO Rent a Car</p>
+      <p class="page-loader-label">Preparando tu recorrido</p>
+    </div>
+  </div>
+  <!-- Header -->
+  <header class="topbar" id="topbar">
+    <nav class="nav container" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="MECO Rent a Car">
+        <img src="https://rodrigocintrao.com.br/propostas/meco/logo.png" alt="MECO Rent a Car">
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a class="active" href="#inicio" aria-current="page" data-manus_clickable="true" data-manus_click_id="1">Inicio</a>
+        <a href="#frota" data-manus_clickable="true" data-manus_click_id="2">Flota</a>
+        <a href="#sobre" data-manus_clickable="true" data-manus_click_id="3">Sobre MECO</a>
+        <a href="#beneficios" data-manus_clickable="true" data-manus_click_id="4">Beneficios</a>
+        <a href="#informacoes" data-manus_clickable="true" data-manus_click_id="5">Información</a>
+        <a href="#faq" data-manus_clickable="true" data-manus_click_id="6">Preguntas frecuentes</a>
+      </div>
+
+      <div class="nav-tools">
+        <select class="lang" aria-label="Idioma" data-manus_clickable="true" data-manus_click_id="7">
+          <option selected="">Español</option>
+          <option>English</option>
+          <option>Português</option>
+        </select>
+        <a class="btn btn-primary nav-cta" href="#reserva" data-manus_clickable="true" data-manus_click_id="8">Solicitá una reserva</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow" style="color:#e8a17b">Misiones · Iguazú · Argentina</span>
+          <h1>Movete por Iguazú <span class="serif">con libertad.</span></h1>
+          <p>Alquilá tu auto con atención personalizada, practicidad y una manera más consciente de recorrer Misiones.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#reserva" data-manus_clickable="true" data-manus_click_id="9">Solicitá una reserva <i class="fa-solid fa-arrow-right"></i></a>
+            <a class="btn btn-ghost" href="#" data-manus_clickable="true" data-manus_click_id="10">Conocé la flota</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking -->
+    <section class="booking-wrap" id="reserva">
+      <div class="container">
+        <form class="booking" id="bookingForm">
+          <div class="booking-top">
+            <div>
+              <span class="eyebrow">Empezá tu viaje</span>
+              <h2>Consultá la disponibilidad</h2>
+            </div>
+            <p class="booking-note">El equipo de MECO se pone en contacto para confirmar disponibilidad, categoría y condiciones.</p>
+          </div>
+
+          <div class="booking-grid">
+            <div class="field span-2">
+              <label for="pickup" data-manus_clickable="true" data-manus_click_id="11">Lugar de retiro</label>
+              <input id="pickup" name="pickup" placeholder="Puerto Iguazú" required="" data-manus_clickable="true" data-manus_click_id="12">
+            </div>
+            <div class="field">
+              <label for="start" data-manus_clickable="true" data-manus_click_id="13">Fecha de retiro</label>
+              <input id="start" name="start" type="date" required="" data-manus_clickable="true" data-manus_click_id="14">
+            </div>
+            <div class="field">
+              <label for="end" data-manus_clickable="true" data-manus_click_id="15">Fecha de devolución</label>
+              <input id="end" name="end" type="date" required="" data-manus_clickable="true" data-manus_click_id="16">
+            </div>
+            <div class="field">
+              <label for="category">Categoría</label>
+              <select id="category" name="category" data-manus_clickable="true" data-manus_click_id="17">
+                <option>Compacto</option>
+                <option>Sedan</option>
+                <option>SUV</option>
+                <option>Sedán Intermedio Plus</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="name" data-manus_clickable="true" data-manus_click_id="18">Nombre</label>
+              <input id="name" name="name" placeholder="¿Cómo te llamamos?" required="" data-manus_clickable="true" data-manus_click_id="19">
+            </div>
+            <div class="field span-2">
+              <label for="contact" data-manus_clickable="true" data-manus_click_id="20">WhatsApp o e-mail</label>
+              <input id="contact" name="contact" placeholder="Tu mejor contacto" required="" data-manus_clickable="true" data-manus_click_id="21">
+            </div>
+          </div>
+
+          <div class="booking-submit">
+            <button class="btn btn-primary" type="submit" data-manus_clickable="true" data-manus_click_id="22">Consultá la disponibilidad <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+
+          <p class="form-status" id="formStatus" role="status">Recibimos tu solicitud. El equipo de MECO se va a poner en contacto para continuar la atención.</p>
+          <p style="font-size:.74rem;color:var(--muted);margin:15px 0 0; text-align: center">
+            <i class="fa-solid fa-location-dot" style="color:var(--terra)"></i> Entrega y retiro en cualquier punto de Puerto Iguazú.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits" id="beneficios">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Un viaje más liviano</span>
+          <h2>Más autonomía para disfrutar el camino.</h2>
+          <p>MECO te acerca a Iguazú con una experiencia de alquiler simple, cercana y conectada con el destino.</p>
+        </div>
+
+        <div class="benefit-grid">
+          <a class="benefit" href="#" data-manus_clickable="true" data-manus_click_id="23">
+            <div class="icon-disc"><i class="fa-solid fa-route"></i></div>
+            <h3>Viajá a tu ritmo</h3>
+            <p>Disfrutá de la libertad de conocer Iguazú, organizar tus horarios y aprovechar cada trayecto con más autonomía.</p>
+          </a>
+          <a class="benefit" href="#" data-manus_clickable="true" data-manus_click_id="24">
+            <div class="icon-disc"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>Contá con información clara</h3>
+            <p>Conocé las coberturas, garantías y condiciones antes de retirar el vehículo.</p>
+          </a>
+          <a class="benefit" href="#" data-manus_clickable="true" data-manus_click_id="25">
+            <div class="icon-disc"><i class="fa-solid fa-key"></i></div>
+            <h3>Alquilá sin complicaciones</h3>
+            <p>Recibí orientación para alquilar un auto por primera vez de manera simple y segura.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="sobre">
+      <div class="container about-grid">
+        <div class="image-frame">
+          <img src="https://rodrigocintrao.com.br/propostas/meco/03.jpg" alt="Paisagem de Misiones com palmeira e campo">
+          <div class="image-stamp">Misiones<br>Eco<br><i class="fa-solid fa-leaf"></i></div>
+        </div>
+
+        <div class="about-copy">
+          <span class="eyebrow">Sobre MECO</span>
+          <h2>Libertad de movimiento, respeto por el destino.</h2>
+          <p>MECO Rent a Car es una empresa de alquiler de autos con sede en <strong>Puerto Iguazú, Misiones, Argentina</strong>. El nombre viene de “Misiones Eco”, una idea que forma parte del origen y la identidad de la marca.</p>
+          <p>Combinamos atención cercana, autonomía para explorar y respeto por la selva misionera y su biodiversidad. Nuestra flota es <strong>100% propia</strong>, y cuenta con vehículos para distintas maneras de viajar.</p>
+
+          <div class="stat-row">
+            <div class="stat"><strong>17</strong><span>vehículos en la flota</span></div>
+            <div class="stat"><strong>4</strong><span>categorías disponibles</span></div>
+            <div class="stat"><strong>100%</strong><span>flota propia</span></div>
+          </div>
+
+          <a class="btn btn-outline" style="margin-top:28px" href="#" data-manus_clickable="true" data-manus_click_id="26">Conocé MECO</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fleet -->
+    <section class="fleet" id="frota">
+      <div class="container">
+        <div class="fleet-top">
+          <div class="section-head" style="margin-bottom:0">
+            <span class="eyebrow">Elegí tu camino</span>
+            <h2>Una flota para tu manera de viajar.</h2>
+            <p>Consultá la categoría que mejor se adapta a tu itinerario. El equipo de MECO confirma la disponibilidad y las condiciones de la reserva.</p>
+          </div>
+        </div>
+
+        <div class="fleet-tabs" role="tablist">
+          <button class="fleet-tab active" data-target="compacto" role="tab" data-manus_clickable="true" data-manus_click_id="27">Compacto</button>
+          <button class="fleet-tab" data-target="sedan" role="tab" data-manus_clickable="true" data-manus_click_id="28">Sedan</button>
+          <button class="fleet-tab" data-target="suv" role="tab" data-manus_clickable="true" data-manus_click_id="29">SUV</button>
+          <button class="fleet-tab" data-target="plus" role="tab" data-manus_clickable="true" data-manus_click_id="30">Sedán Intermedio Plus</button>
+        </div>
+
+        <div class="fleet-panel active" id="compacto">
+          <div class="fleet-photo">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/06.jpg" alt="Veículo compacto MECO em Puerto Iguazú">
+          </div>
+          <div class="fleet-info">
+            <span class="eyebrow">Categoria 01</span>
+            <h3>Compacto</h3>
+            <p>Una opción práctica para moverte por Iguazú. Hay vehículos disponibles con caja manual y automática.</p>
+            <div class="specs">
+              <span class="spec"><i class="fa-solid fa-gears"></i> Caja manual y automática</span>
+              <span class="spec"><i class="fa-solid fa-star"></i> Onix Compacto Manual, el más solicitado</span>
+            </div>
+            <a class="btn btn-primary" href="#" data-manus_clickable="true" data-manus_click_id="31">Consultá compactos</a>
+          </div>
+        </div>
+
+        <div class="fleet-panel" id="sedan">
+          <div class="fleet-photo">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/02.jpg" alt="Sedan MECO ao pôr do sol">
+          </div>
+          <div class="fleet-info">
+            <span class="eyebrow">Categoria 02</span>
+            <h3>Sedan</h3>
+            <p>Para quienes buscan comodidad y practicidad al moverse por Misiones.</p>
+            <div class="specs">
+              <span class="spec"><i class="fa-solid fa-gears"></i> Versión manual disponible</span>
+            </div>
+            <a class="btn btn-primary" href="#">Consultá sedanes</a>
+          </div>
+        </div>
+
+        <div class="fleet-panel" id="suv">
+          <div class="fleet-photo">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/10.jpg" alt="Veículo MECO em estrada de natureza">
+          </div>
+          <div class="fleet-info">
+            <span class="eyebrow">Categoria 03</span>
+            <h3>SUV</h3>
+            <p>Una categoría automática para viajar con comodidad y explorar los destinos de la región.</p>
+            <div class="specs">
+              <span class="spec"><i class="fa-solid fa-gears"></i> Caja automática</span>
+            </div>
+            <a class="btn btn-primary" href="#">Consultá SUV</a>
+          </div>
+        </div>
+
+        <div class="fleet-panel" id="plus">
+          <div class="fleet-photo">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/04.jpg" alt="Veículo MECO em paisagem de Misiones">
+          </div>
+          <div class="fleet-info">
+            <span class="eyebrow">Categoria 04</span>
+            <h3>Sedán Intermedio Plus</h3>
+            <p>Una alternativa para quienes buscan más espacio y comodidad al moverse.</p>
+            <div class="specs">
+              <span class="spec"><i class="fa-solid fa-car"></i> Consultá la disponibilidad</span>
+            </div>
+            <a class="btn btn-primary" href="#">Consultá la categoría</a>
+          </div>
+        </div>
+
+        <div class="fleet-cta">
+          <a class="btn btn-outline" href="#" data-manus_clickable="true" data-manus_click_id="32">Ver disponibilidad de la flota <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Differentials -->
+    <section class="differentials">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Por qué MECO</span>
+          <h2>El cuidado está en cada detalle del recorrido.</h2>
+          <p>Una experiencia pensada para quienes quieren explorar Iguazú con mayor cercanía y menos burocracia.</p>
+        </div>
+
+        <div class="diff-grid">
+          <div class="diff">
+            <i class="fa-solid fa-car-side"></i>
+            <h3>Flota 100% propia</h3>
+            <p>Vehículos propios de MECO, sin terceros ni proveedores asociados.</p>
+          </div>
+          <div class="diff">
+            <i class="fa-solid fa-user-check"></i>
+            <h3>Atención personalizada</h3>
+            <p>Orientación cercana para encontrar la categoría adecuada.</p>
+          </div>
+          <div class="diff">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Entrega donde estés</h3>
+            <p>Entrega y retiro en cualquier punto de Puerto Iguazú.</p>
+          </div>
+          <div class="diff">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <h3>Sin burocracia</h3>
+            <p>Un camino simple para empezar tu viaje.</p>
+          </div>
+          <div class="diff">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <h3>Precio competitivo</h3>
+            <p>Consultá las condiciones directamente con el equipo de MECO.</p>
+          </div>
+          <div class="diff">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Compromiso ambiental</h3>
+            <p>Plantación de árboles nativos para reducir parte de la huella de la actividad.</p>
+          </div>
+        </div>
+
+        <div class="diff-action">
+          <a class="btn btn-primary" href="#" data-manus_clickable="true" data-manus_click_id="33">Hablá con el equipo de MECO <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experiences -->
+    <section class="experiences" id="experiencias">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Planificá más allá del auto</span>
+          <h2>Las buenas elecciones también forman parte del viaje.</h2>
+          <p>Recomendaciones para organizar tu experiencia en Iguazú, con aliados y lugares que forman parte del universo MECO.</p>
+        </div>
+
+        <div class="experience-grid">
+          <div class="experience-card featured">
+            <span class="eyebrow">Alojamiento</span>
+            <h3>Dónde descansar entre un camino y otro.</h3>
+            <p>El Hotel Saint George es un aliado importante de MECO. Su equipo de reservas también trabaja comercialmente para MECO y puede derivar consultas de alquiler.</p>
+            <div class="partner-list">
+              <a class="partner" href="https://www.hotelsaintgeorge.com/" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="34"><i class="fa-solid fa-hotel"></i> Hotel Saint George</a>
+              <a class="partner" href="https://www.google.com/search?q=Overo+Lodge+%26+Selva+Puerto+Iguaz%C3%BA" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="35"><i class="fa-solid fa-tree"></i> Overo Lodge &amp; Selva</a>
+              <a class="partner" href="https://www.google.com/search?q=Posada+Palma+Real+Puerto+Iguaz%C3%BA" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="36"><i class="fa-solid fa-bed"></i> Posada Palma Real</a>
+            </div>
+          </div>
+
+          <div class="experience-card">
+            <span class="eyebrow">Gastronomía</span>
+            <h3>Sabores de Misiones.</h3>
+            <p>Una pausa para conocer la región también pasa por la mesa.</p>
+            <div class="partner-list">
+              <a class="partner" href="https://www.google.com/search?q=Perobal+Restaurante+Puerto+Iguaz%C3%BA" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="37"><i class="fa-solid fa-utensils"></i> Perobal Restaurante</a>
+            </div>
+          </div>
+
+          <div class="experience-card">
+            <span class="eyebrow">Comercios y servicios</span>
+            <h3>Más referencias para el camino.</h3>
+            <p>Encontrá opciones para complementar tu estadía.</p>
+            <div class="partner-list">
+              <a class="partner" href="https://www.google.com/search?q=Mundoffice+Puerto+Iguaz%C3%BA" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="38"><i class="fa-solid fa-store"></i> Mundoffice</a>
+              <a class="partner" href="https://www.instagram.com/guardiandelmonte/" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="39"><i class="fa-brands fa-instagram"></i> Guardián del Monte</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sustainability -->
+    <section class="sustain" id="sustentabilidade">
+      <div class="container sustain-grid">
+        <div>
+          <span class="eyebrow" style="color:#df9a65">Misiones Eco</span>
+          <h2>Viajar también es cuidar el camino.</h2>
+          <p>La sustentabilidad está en el propio significado de MECO — “Misiones Eco”. Es un pilar de nuestra identidad y un compromiso que construimos de manera práctica y continua.</p>
+          <a class="btn btn-primary" href="#" data-manus_clickable="true" data-manus_click_id="40">Conocé nuestro compromiso</a>
+        </div>
+        <div class="sustain-card">
+          <i class="fa-solid fa-seedling"></i>
+          <h3>Una acción concreta</h3>
+          <p>MECO planta árboles nativos para compensar y reducir la huella de carbono generada por la actividad.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info / FAQ -->
+    <section class="info" id="informacoes">
+      <div class="container info-grid">
+        <div class="info-intro">
+          <span class="eyebrow">Información adicional</span>
+          <h2>Claridad para que sigas tranquilo.</h2>
+          <p>Reunimos los puntos más importantes para orientarte. Cuando la información dependa de la reserva, hablá con el equipo de MECO.</p>
+          <a class="btn btn-outline" href="#" data-manus_clickable="true" data-manus_click_id="41">Consultá al equipo</a>
+        </div>
+
+        <div class="accordion" id="faq">
+          <div class="accordion-item open" id="coberturas">
+            <button class="accordion-trigger" aria-expanded="true" data-manus_clickable="true" data-manus_click_id="42">Coberturas y garantías <i class="fa-solid fa-plus"></i></button>
+            <div class="accordion-content">
+              <div>Conocé las coberturas, garantías y condiciones aplicables antes de retirar el vehículo. El equipo de MECO confirma los detalles según la reserva.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" data-manus_clickable="true" data-manus_click_id="43">Adicionales <i class="fa-solid fa-plus"></i></button>
+            <div class="accordion-content">
+              <div>Consultá al equipo de MECO sobre los servicios o ítems adicionales disponibles para tu reserva.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" data-manus_clickable="true" data-manus_click_id="44">Políticas de alquiler <i class="fa-solid fa-plus"></i></button>
+            <div class="accordion-content">
+              <div>El equipo informa las políticas de retiro, devolución, combustible, cancelación y demás condiciones durante la atención de la reserva.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" data-manus_clickable="true" data-manus_click_id="45">Preguntas frecuentes <i class="fa-solid fa-plus"></i></button>
+            <div class="accordion-content">
+              <div>
+                <strong>¿Qué categorías están disponibles?</strong> Compacto, Sedan, SUV e Sedán Intermedio Plus.<br><br>
+                <strong>¿MECO realiza entregas y retiros en Puerto Iguazú?</strong> Sim, em qualquer ponto de Puerto Iguazú.<br><br>
+                <strong>¿Cómo funciona el primer alquiler?</strong> Consultá al equipo para recibir orientación y confirmar los requisitos actualizados.<br><br>
+                <strong>¿Cómo consulto la disponibilidad?</strong> Completá el formulario de reserva y el equipo se va a poner en contacto.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" id="requisitos">
+            <button class="accordion-trigger" aria-expanded="false" data-manus_clickable="true" data-manus_click_id="46">Requisitos <i class="fa-solid fa-plus"></i></button>
+            <div class="accordion-content">
+              <div>Consultá al equipo de MECO para confirmar los requisitos actualizados de tu reserva.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <div class="container final-cta-inner">
+        <div>
+          <span class="eyebrow" style="color:#df9a65">Tu próximo recorrido</span>
+          <h2>Empieza acá.</h2>
+          <p>Consultá la disponibilidad de la flota y contá con el equipo de MECO para encontrar la mejor opción para tu viaje por Iguazú.</p>
+        </div>
+        <div class="final-actions">
+          <a class="btn btn-primary" href="#reserva" data-manus_clickable="true" data-manus_click_id="47">Solicitá una reserva</a>
+          <a class="btn btn-ghost" href="https://wa.me/5493757533256" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="48">Hablá por WhatsApp <i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/logo.png" alt="MECO Rent a Car">
+          </a>
+          <p>Movilidad para vivir Iguazú con libertad, cercanía y respeto por el destino.</p>
+          <div class="contact-line">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Puerto Iguazú, Misiones, Argentina</p>
+          </div>
+          <div class="contact-line">
+            <i class="fa-brands fa-whatsapp"></i>
+            <p><a href="https://wa.me/5493757533256" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="49">+54 9 3757 53 3256</a></p>
+          </div>
+        </div>
+
+        <div>
+          <h3>Explorá</h3>
+          <div class="footer-links">
+            <a href="#" data-manus_clickable="true" data-manus_click_id="50">Flota</a>
+            <a href="#" data-manus_clickable="true" data-manus_click_id="51">Sobre MECO</a>
+            <a href="#" data-manus_clickable="true" data-manus_click_id="52">Beneficios</a>
+            <a href="#" data-manus_clickable="true" data-manus_click_id="53">Experiencias</a>
+          </div>
+        </div>
+
+        <div>
+          <h3>Ayuda</h3>
+          <div class="footer-links">
+            <a href="#" data-manus_clickable="true" data-manus_click_id="54">Términos y condiciones</a>
+            <a href="#" data-manus_clickable="true" data-manus_click_id="55">Política de privacidad</a>
+            <a href="#" data-manus_clickable="true" data-manus_click_id="56">Botón de arrepentimiento</a>
+            <a href="#" data-manus_clickable="true" data-manus_click_id="57">Preguntas frecuentes</a>
+            <a href="#" data-manus_clickable="true" data-manus_click_id="58">Requisitos</a>
+          </div>
+        </div>
+
+        <div>
+          <h3>Conectate</h3>
+          <div class="footer-links social">
+            <a href="https://www.instagram.com/mecorentacar/" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="59"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.instagram.com/mecorentacar/" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="60"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/mecorentacar/" target="_blank" rel="noopener noreferrer" data-manus_clickable="true" data-manus_click_id="61"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <span>© 2026 MECO Rent a Car. Todos los derechos reservados.</span>
+        <span>Misiones · Argentina</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <a class="wa-float" href="https://wa.me/5493757533256" target="_blank" rel="noopener noreferrer" aria-label="Hablar con MECO por WhatsApp" data-manus_clickable="true" data-manus_click_id="62">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script>
+    const topbar = document.getElementById('topbar');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      topbar.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', open);
+      menuToggle.innerHTML = open
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    navLinks.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
+
+    document.querySelectorAll('.fleet-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.fleet-tab').forEach((t) => t.classList.remove('active'));
+        document.querySelectorAll('.fleet-panel').forEach((p) => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.accordion-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const isOpen = item.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', isOpen);
+      });
+    });
+
+    document.getElementById('bookingForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('formStatus').classList.add('show');
+      e.target.querySelector('button[type=submit]').innerHTML = 'Solicitud recibida <i class="fa-solid fa-check"></i>';
+    });
+
+
+    // Scroll reveal: anima somente o que entra no campo de visão.
+    const revealSelectors = [
+      ['main > section', 'up'], ['.booking', 'scale'], ['.section-head', 'up'],
+      ['.benefit', 'up'], ['.image-frame', 'left'], ['.about-copy > *', 'right'],
+      ['.fleet-tabs', 'up'], ['.fleet-panel.active', 'up'], ['.diff', 'up'],
+      ['.experience-card', 'up'], ['.sustain-grid > *', 'up'], ['.info-intro', 'left'],
+      ['.accordion', 'right'], ['.final-cta-inner > *', 'up'], ['.footer-grid > div', 'up']
+    ];
+    const revealItems = [];
+    revealSelectors.forEach(([selector, direction]) => {
+      document.querySelectorAll(selector).forEach((element) => {
+        if (element.dataset.reveal) return;
+        element.dataset.reveal = direction;
+        revealItems.push(element);
+      });
+    });
+    document.querySelectorAll('.benefit, .diff, .experience-card, .footer-grid > div').forEach((element, index) => {
+      element.style.setProperty('--reveal-delay', `${(index % 3) * 90}ms`);
+    });
+    document.querySelectorAll('.about-copy > *, .sustain-grid > *, .final-cta-inner > *').forEach((element, index) => {
+      element.style.setProperty('--reveal-delay', `${index * 100}ms`);
+    });
+    document.body.classList.add('reveal-enabled');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealItems.forEach((element) => element.classList.add('is-visible'));
+    } else {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -7% 0px' });
+      revealItems.forEach((element) => revealObserver.observe(element));
+    }
+
+    // Oculta el loader solamente cuando todos los recursos de la página terminaron de cargar.
+    const hidePageLoader = () => {
+      const pageLoader = document.getElementById('pageLoader');
+      if (!pageLoader) return;
+
+      pageLoader.classList.add('is-hidden');
+      document.body.classList.remove('is-loading');
+      window.setTimeout(() => pageLoader.remove(), 650);
+    };
+
+    window.addEventListener('load', () => {
+      const fontsReady = document.fonts && document.fonts.ready
+        ? document.fonts.ready
+        : Promise.resolve();
+
+      fontsReady.then(hidePageLoader);
+    }, { once: true });
+  </script>
+
+</body></html>
