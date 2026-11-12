@@ -1,0 +1,1625 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4612a">
+  <title>MECO Rent a Car — Movete por Iguazú</title>
+  <meta name="description" content="Alquilá tu auto en Puerto Iguazú con atención cercana, una flota propia y libertad para recorrer Misiones.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --orange: #f4612a;
+      --orange-dark: #d94d1c;
+      --ink: #132536;
+      --ink-soft: #4c5b66;
+      --cream: #f5f1e9;
+      --paper: #fffdf8;
+      --mint: #dceee5;
+      --line: rgba(19, 37, 54, .16);
+      --shadow: 0 18px 60px rgba(19, 37, 54, .13);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Manrope', sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .mono {
+      font: 500 11px/1.1 'DM Mono', monospace;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* ── Premium loader ─────────────────────────────── */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      transition: opacity .5s ease, visibility .5s ease;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .loader-spinner {
+      position: relative;
+      width: 64px;
+      height: 64px;
+    }
+
+    .loader-spinner::before,
+    .loader-spinner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px solid transparent;
+    }
+
+    .loader-spinner::before {
+      border-top-color: var(--orange);
+      border-right-color: rgba(244, 97, 42, .35);
+      animation: spin 1s cubic-bezier(.65, 0, .35, 1) infinite;
+    }
+
+    .loader-spinner::after {
+      inset: 10px;
+      border-bottom-color: rgba(255, 255, 255, .55);
+      border-left-color: rgba(255, 255, 255, .12);
+      animation: spin 1.6s cubic-bezier(.65, 0, .35, 1) infinite reverse;
+    }
+
+    .loader-mark {
+      width: 30px;
+      height: 30px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    .loader-mark svg {
+      width: 22px;
+      transform: rotate(-16deg);
+    }
+
+    .loader-copy {
+      text-align: center;
+      color: #fff;
+    }
+
+    .loader-copy strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .loader-copy span {
+      display: block;
+      margin-top: 6px;
+      color: rgba(255, 255, 255, .55);
+      font: 400 10px 'DM Mono', monospace;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(.86); }
+    }
+
+    .topline {
+      height: 5px;
+      background: var(--orange);
+    }
+
+    .site-header {
+      height: 78px;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 253, 248, .94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -.07em;
+    }
+
+    .brand img {
+      width: 94px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .brand-mark svg {
+      width: 22px;
+      transform: rotate(-16deg);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav a {
+      opacity: .72;
+      transition: .2s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      opacity: 1;
+      color: var(--orange-dark);
+    }
+
+    .header-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink);
+      color: #fff;
+      padding: 13px 17px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .header-action:hover {
+      background: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .menu-button {
+      display: none;
+      border: 0;
+      background: none;
+      font-size: 22px;
+      color: var(--ink);
+    }
+
+    .lang-select {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      transition: .2s;
+    }
+
+    .lang-select:hover {
+      border-color: var(--orange);
+      color: var(--orange-dark);
+    }
+
+    .booking-dock {
+      position: sticky;
+      top: 78px;
+      z-index: 25;
+      padding: 11px 0;
+      background: var(--orange);
+      box-shadow: 0 10px 28px rgba(244, 97, 42, .24);
+    }
+
+    .booking-inner {
+      display: grid;
+      grid-template-columns: 1.15fr .86fr .86fr .86fr .86fr auto;
+      gap: 9px;
+      align-items: end;
+    }
+
+    .booking-label {
+      color: #fff;
+      padding: 1px 14px 7px 0;
+    }
+
+    .booking-label strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .booking-label span {
+      display: block;
+      margin-top: 4px;
+      opacity: .75;
+      font-size: 10px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field label {
+      display: block;
+      margin: 0 0 5px 2px;
+      color: rgba(255, 255, 255, .7);
+      font: 400 9px 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .field-control {
+      height: 39px;
+      width: 100%;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 9px;
+      outline: none;
+      color: var(--ink);
+      background: #fffaf2;
+      font-size: 11px;
+      font-weight: 700;
+      transition: box-shadow .2s ease, transform .2s ease;
+    }
+
+    .field-control:focus {
+      box-shadow: 0 0 0 3px rgba(19, 37, 54, .25);
+    }
+
+    .booking-button {
+      height: 39px;
+      padding: 0 19px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--ink);
+      color: #fff;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: .2s;
+    }
+
+    .booking-button:hover {
+      background: #fff;
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      min-height: 610px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 0 48px;
+      overflow: hidden;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .hero:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(10, 25, 38, .92) 0%, rgba(10, 25, 38, .52) 46%, rgba(10, 25, 38, .15) 100%), url('https://rodrigocintrao.com.br/propostas/meco/01.jpg') center/cover;
+      opacity: .96;
+      animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.06); }
+    }
+
+    .hero:after {
+      content: '';
+      position: absolute;
+      right: -5vw;
+      top: -105px;
+      width: 65vw;
+      height: 65vw;
+      background: url('https://rodrigocintrao.com.br/propostas/meco/m-contorno-branco.svg') center/contain no-repeat;
+      opacity: .3;
+      transform: rotate(-10deg);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(750px, 100%);
+    }
+
+    .eyebrow {
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow:before {
+      content: '';
+      width: 30px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      max-width: 700px;
+      margin: 0;
+      font-size: clamp(50px, 7vw, 92px);
+      line-height: .91;
+      letter-spacing: -.085em;
+      font-weight: 800;
+    }
+
+    .hero-copy {
+      max-width: 430px;
+      margin: 27px 0 31px;
+      color: rgba(255, 255, 255, .8);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 11px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .button-primary {
+      color: #fff;
+      background: var(--orange);
+    }
+
+    .button-primary:hover {
+      background: #ff7a43;
+      transform: translateY(-2px);
+    }
+
+    .button-ghost {
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .45);
+    }
+
+    .button-ghost:hover {
+      border-color: #fff;
+      background: rgba(255, 255, 255, .1);
+    }
+
+    .hero-meta {
+      position: absolute;
+      right: 0;
+      bottom: 54px;
+      z-index: 1;
+      display: flex;
+      gap: 28px;
+      color: rgba(255, 255, 255, .75);
+    }
+
+    .hero-meta strong {
+      display: block;
+      color: var(--orange);
+      font-size: 26px;
+      letter-spacing: -.08em;
+    }
+
+    .hero-meta span {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      color: var(--orange);
+      margin-bottom: 13px;
+    }
+
+    h2 {
+      margin: 0;
+      max-width: 610px;
+      font-size: clamp(34px, 4.3vw, 58px);
+      line-height: .98;
+      letter-spacing: -.075em;
+    }
+
+    .section-intro {
+      max-width: 310px;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .fleet-section {
+      background: var(--cream);
+    }
+
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+    }
+
+    .car-card {
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      padding: 19px 19px 32px;
+      border-radius: var(--radius);
+      background: var(--paper);
+      transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
+    }
+
+    .car-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+    }
+
+    .car-card.featured {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .car-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+      border-radius: 13px;
+      opacity: .94;
+      transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .car-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .featured img {
+      mix-blend-mode: normal;
+    }
+
+    .car-card .tag {
+      display: inline-flex;
+      padding: 6px 8px;
+      background: rgba(19, 37, 54, .08);
+      border-radius: 99px;
+      margin-top: 15px;
+      color: var(--ink-soft);
+      font: 500 9px 'DM Mono', monospace;
+      text-transform: uppercase;
+    }
+
+    .featured .tag {
+      color: #fff;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .car-card h3 {
+      margin: 13px 0 8px;
+      font-size: 21px;
+      letter-spacing: -.06em;
+    }
+
+    .car-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .featured p {
+      color: rgba(255, 255, 255, .78);
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 17px;
+      bottom: 17px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      transition: transform .35s cubic-bezier(.22, 1, .36, 1), background .2s;
+    }
+
+    .car-card:hover .card-arrow {
+      transform: rotate(-45deg) scale(1.08);
+    }
+
+    .featured .card-arrow {
+      background: #fff;
+      color: var(--orange);
+    }
+
+    .about {
+      background: var(--paper);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image {
+      min-height: 510px;
+      position: relative;
+      border-radius: 0 150px 0 150px;
+      overflow: hidden;
+      background: var(--mint);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .about-image:after {
+      content: 'MECO';
+      position: absolute;
+      right: -30px;
+      bottom: 18px;
+      font-size: 84px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.1em;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(255, 255, 255, .85);
+      transform: rotate(-90deg);
+    }
+
+    .about-copy h2 {
+      margin-bottom: 24px;
+    }
+
+    .about-copy > p {
+      max-width: 470px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+      margin-top: 38px;
+    }
+
+    .stat {
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 31px;
+      letter-spacing: -.08em;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink-soft);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .reasons {
+      background: var(--ink);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reasons:before {
+      content: '';
+      position: absolute;
+      left: -5vw;
+      top: 30px;
+      width: 44vw;
+      height: 44vw;
+      background: url('https://rodrigocintrao.com.br/propostas/meco/m.svg') center/contain no-repeat;
+      opacity: .3;
+      transform: rotate(18deg);
+      pointer-events: none;
+      animation: slowFloat 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowFloat {
+      from { transform: rotate(18deg) translateY(0); }
+      to { transform: rotate(24deg) translateY(-18px); }
+    }
+
+    .reasons .section-head,
+    .reason-grid {
+      position: relative;
+      z-index: 1;
+    }
+
+    .reasons .section-intro {
+      color: rgba(255, 255, 255, .62);
+    }
+
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .reason {
+      min-height: 220px;
+      padding: 22px 19px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .04);
+      transition: transform .35s cubic-bezier(.22, 1, .36, 1), background .35s ease, border-color .35s ease;
+    }
+
+    .reason:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(244, 97, 42, .6);
+    }
+
+    .reason i {
+      color: var(--orange);
+      font-size: 23px;
+      transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .reason:hover i {
+      transform: scale(1.15) rotate(-6deg);
+    }
+
+    .reason h3 {
+      margin: 43px 0 9px;
+      font-size: 17px;
+      letter-spacing: -.05em;
+    }
+
+    .reason p {
+      margin: 0;
+      color: rgba(255, 255, 255, .62);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .cta {
+      padding: 75px 0;
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .cta-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .cta h2 {
+      max-width: 610px;
+    }
+
+    .cta .button {
+      background: var(--ink);
+    }
+
+    .cta .button:hover {
+      background: #fff;
+      color: var(--ink);
+    }
+
+    footer {
+      padding: 50px 0 28px;
+      background: var(--paper);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 40px;
+      padding-bottom: 38px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .footer-brand p {
+      max-width: 245px;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 70px;
+    }
+
+    .footer-links h4 {
+      margin: 0 0 14px;
+      font: 500 10px 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .footer-links a {
+      display: block;
+      margin: 8px 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+      transition: color .2s ease, transform .2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--orange);
+      transform: translateX(3px);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 20px;
+      color: var(--ink-soft);
+      font-size: 10px;
+    }
+
+    .social {
+      display: flex;
+      gap: 12px;
+      font-size: 15px;
+    }
+
+    .social a {
+      transition: transform .25s ease, color .25s ease;
+    }
+
+    .social a:hover {
+      transform: translateY(-3px) scale(1.1);
+      color: var(--orange);
+    }
+
+    /* ── Eco seal (footer) ─────────────────────────────── */
+    .eco-seal {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 22px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--mint);
+      max-width: 320px;
+      transition: .2s;
+    }
+
+    .eco-seal:hover {
+      border-color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .eco-seal-icon {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .eco-seal:hover .eco-seal-icon {
+      transform: rotate(-12deg) scale(1.08);
+    }
+
+    .eco-seal-copy {
+      min-width: 0;
+    }
+
+    .eco-seal-copy strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -.01em;
+    }
+
+    .eco-seal-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--ink-soft);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 50;
+      right: 23px;
+      bottom: 23px;
+      max-width: 330px;
+      padding: 17px 20px;
+      border-radius: 13px;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow);
+      transform: translateY(140%);
+      transition: .35s;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+    }
+
+    .toast strong {
+      display: block;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+
+    /* ── Scroll reveal animations ─────────────────────── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+
+    [data-reveal="left"] {
+      transform: translateX(-44px);
+    }
+
+    [data-reveal="right"] {
+      transform: translateX(44px);
+    }
+
+    [data-reveal="scale"] {
+      transform: scale(.92);
+    }
+
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .hero:before,
+      .reasons:before,
+      .loader-mark,
+      .loader-spinner::before,
+      .loader-spinner::after {
+        animation: none !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        gap: 17px;
+      }
+
+      .header-action {
+        display: none;
+      }
+
+      .booking-inner {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .booking-label {
+        display: none;
+      }
+
+      .booking-button {
+        grid-column: span 3;
+      }
+
+      .hero-meta {
+        display: none;
+      }
+
+      .fleet-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .reason-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid {
+        gap: 45px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 30px, 1180px);
+      }
+
+      .site-header {
+        height: 68px;
+      }
+
+      .brand img {
+        width: 82px;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .nav {
+        display: none;
+        position: absolute;
+        left: 15px;
+        right: 15px;
+        top: 62px;
+        padding: 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav.open {
+        display: flex;
+      }
+
+      .booking-dock {
+        top: 68px;
+      }
+
+      .booking-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .booking-button {
+        grid-column: span 2;
+      }
+
+      .field-control {
+        font-size: 10px;
+      }
+
+      .hero {
+        min-height: 615px;
+        padding: 55px 0 35px;
+      }
+
+      .hero:after {
+        width: 100vw;
+        height: 100vw;
+        top: 170px;
+      }
+
+      h1 {
+        font-size: clamp(48px, 15vw, 74px);
+      }
+
+      .hero-copy {
+        font-size: 14px;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .section-head {
+        display: block;
+        margin-bottom: 28px;
+      }
+
+      .section-intro {
+        margin-top: 18px;
+      }
+
+      .fleet-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+      }
+
+      .car-card {
+        min-height: 270px;
+        padding: 12px;
+        border-radius: 16px;
+      }
+
+      .car-card img {
+        height: 105px;
+        border-radius: 10px;
+      }
+
+      .car-card h3 {
+        margin: 10px 0 6px;
+        font-size: 17px;
+      }
+
+      .car-card p {
+        font-size: 10px;
+      }
+
+      .about-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+      }
+
+      .about-image {
+        width: 100%;
+        min-height: 350px;
+      }
+
+      .stats {
+        gap: 8px;
+      }
+
+      .stat strong {
+        font-size: 24px;
+      }
+
+      .reason-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+      }
+
+      .reason {
+        min-height: 195px;
+        padding: 17px 14px;
+      }
+
+      .reason h3 {
+        margin-top: 34px;
+        font-size: 15px;
+      }
+
+      .reason p {
+        font-size: 10px;
+      }
+
+      .cta-inner {
+        display: block;
+      }
+
+      .cta .button {
+        margin-top: 26px;
+      }
+
+      .footer-top {
+        display: block;
+      }
+
+      .footer-links {
+        margin-top: 35px;
+        gap: 35px;
+      }
+
+      .footer-bottom {
+        display: block;
+      }
+
+      .social {
+        margin-top: 12px;
+      }
+
+      .eco-seal {
+        margin-top: 20px;
+        max-width: 100%;
+      }
+
+      .loader-copy strong {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Premium loader: aparece antes de todo el contenido -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-spinner">
+        <span class="loader-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 17.5C7 12.5 10 8 14.5 4.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M8.5 19.5C11.5 14.5 14.5 10.5 19 6.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="loader-copy">
+        <strong>MECO Rent a Car</strong>
+        <span>Preparando tu viaje</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="topline"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="MECO Rent a Car">
+        <img src="https://rodrigocintrao.com.br/propostas/meco/logo.png" alt="MECO">
+      </a>
+
+      <nav class="nav" id="mainNav">
+        <a href="#">Flota</a>
+        <a href="#">Sobre MECO</a>
+        <a href="#">Beneficios</a>
+        <a href="#">Información</a>
+        <a href="#">Preguntas frecuentes</a>
+      </nav>
+
+      <select class="lang-select" id="langSelect" aria-label="Seleccionar idioma">
+        <option selected="">Español</option>
+        <option>English</option>
+        <option>Português</option>
+      </select>
+
+      <button class="menu-button" id="menuButton" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="booking-dock" id="availability">
+    <form class="container booking-inner" id="bookingForm">
+      <div class="booking-label">
+        <strong>Empezá tu viaje.</strong>
+        <span>Te respondemos rápido.</span>
+      </div>
+
+      <div class="field">
+        <label for="place">Lugar de retiro</label>
+        <select class="field-control" id="place">
+          <option>Puerto Iguazú</option>
+          <option>Aeropuerto IGU</option>
+          <option>Hotel / domicilio</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="category">Categoría</label>
+        <select class="field-control" id="category">
+          <option>Compacto</option>
+          <option>Sedán</option>
+          <option>SUV</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="pickup">Fecha de retiro</label>
+        <input class="field-control" type="date" id="pickup" required>
+      </div>
+
+      <div class="field">
+        <label for="return">Fecha de devolución</label>
+        <input class="field-control" type="date" id="return" required>
+      </div>
+
+      <button class="booking-button" type="submit">
+        Solicitá una reserva <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </form>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-content" data-reveal>
+        <div class="eyebrow mono">Misiones · Iguazú · Argentina</div>
+        <h1>Movete<br>con libertad.</h1>
+        <p class="hero-copy">Alquilá tu auto con atención personalizada, practicidad y una manera más consciente de recorrer Misiones.</p>
+        <div class="hero-buttons">
+          <a class="button button-primary" href="#">
+            Conocé MECO <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a class="button button-ghost" href="#">Conocé la flota</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="fleet-section" id="fleet">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <div class="section-kicker mono">Elegí tu camino</div>
+            <h2>Una flota para tu manera de viajar.</h2>
+          </div>
+          <p class="section-intro" data-reveal style="--reveal-delay: 120ms;">Compactos para moverte por la ciudad, SUVs para salir a explorar. El equipo de MECO te ayuda a elegir.</p>
+        </div>
+
+        <div class="fleet-grid">
+          <article class="car-card featured" data-reveal="scale" style="--reveal-delay: 0ms;">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/02.jpg" alt="Vehículo compacto MECO en Puerto Iguazú">
+            <span class="tag">Más solicitado</span>
+            <h3>Compacto</h3>
+            <p>Práctico para moverte por Iguazú. Manual y automático.</p>
+            <span class="card-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+          </article>
+
+          <article class="car-card" data-reveal="scale" style="--reveal-delay: 90ms;">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/03.jpg" alt="Sedán MECO al atardecer">
+            <span class="tag">Comodidad</span>
+            <h3>Sedán</h3>
+            <p>Más espacio y confort para recorrer Misiones.</p>
+            <span class="card-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+          </article>
+
+          <article class="car-card" data-reveal="scale" style="--reveal-delay: 180ms;">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/04.jpg" alt="SUV MECO en una carretera natural">
+            <span class="tag">Automático</span>
+            <h3>SUV</h3>
+            <p>Para viajar con comodidad y explorar cada desvío.</p>
+            <span class="card-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+          </article>
+
+          <article class="car-card" data-reveal="scale" style="--reveal-delay: 270ms;">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/05.jpg" alt="Sedán intermedio MECO en paisaje de Misiones">
+            <span class="tag">Más espacio</span>
+            <h3>Intermedio Plus</h3>
+            <p>Una alternativa amplia para viajes largos.</p>
+            <span class="card-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container about-grid">
+        <div class="about-image" data-reveal="left">
+          <img src="https://rodrigocintrao.com.br/propostas/meco/06.jpg" alt="Paisaje de Misiones con naturaleza exuberante">
+        </div>
+
+        <div class="about-copy" data-reveal="right" style="--reveal-delay: 150ms;">
+          <div class="section-kicker mono">Sobre MECO</div>
+          <h2>Libertad de movimiento. Respeto por el destino.</h2>
+          <p>MECO Rent a Car nace en Puerto Iguazú para hacer más simple la experiencia de conocer Misiones. Una flota propia, una atención cercana y la información clara para que cada recorrido empiece bien.</p>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>17</strong>
+              <span>vehículos<br>en la flota</span>
+            </div>
+            <div class="stat">
+              <strong>4</strong>
+              <span>categorías<br>disponibles</span>
+            </div>
+            <div class="stat">
+              <strong>100%</strong>
+              <span>flota<br>propia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reasons" id="reasons">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <div class="section-kicker mono">La experiencia MECO</div>
+            <h2>Menos burocracia.<br>Más camino.</h2>
+          </div>
+          <p class="section-intro" data-reveal style="--reveal-delay: 120ms;">Todo lo que necesitás para disfrutar Iguazú a tu ritmo, con alguien del otro lado cuando lo necesitás.</p>
+        </div>
+
+        <div class="reason-grid">
+          <article class="reason" data-reveal style="--reveal-delay: 0ms;">
+            <i class="fa-solid fa-route"></i>
+            <h3>Viajá a tu ritmo</h3>
+            <p>Organizá tus horarios y aprovechá cada trayecto con autonomía.</p>
+          </article>
+
+          <article class="reason" data-reveal style="--reveal-delay: 100ms;">
+            <i class="fa-solid fa-comments"></i>
+            <h3>Atención cercana</h3>
+            <p>Orientación simple, directa y personalizada antes de retirar.</p>
+          </article>
+
+          <article class="reason" data-reveal style="--reveal-delay: 200ms;">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Entrega donde estés</h3>
+            <p>Retiro y devolución en cualquier punto de Puerto Iguazú.</p>
+          </article>
+
+          <article class="reason" data-reveal style="--reveal-delay: 300ms;">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Información clara</h3>
+            <p>Conocé coberturas, garantías y condiciones sin sorpresas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="#">
+            <img src="https://rodrigocintrao.com.br/propostas/meco/logo.png" alt="MECO">
+          </a>
+          <p>Movilidad para vivir Iguazú con libertad, cercanía y respeto por el destino.</p>
+
+          <!-- Eco seal: substitui a seção Sustainability -->
+          <a class="eco-seal" href="https://wa.me/5493757533256?text=Hola%2C%20quiero%20conocer%20el%20compromiso%20ambiental%20de%20MECO" target="_blank" rel="noopener" aria-label="Conocé el compromiso ambiental de MECO">
+            <span class="eco-seal-icon"><i class="fa-solid fa-leaf"></i></span>
+            <span class="eco-seal-copy">
+              <strong>Misiones Eco</strong>
+              <span>Plantamos árboles nativos para cuidar la selva.</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <h4>Explorá</h4>
+            <a href="#">Flota</a>
+            <a href="#">Sobre MECO</a>
+            <a href="#">Por qué MECO</a>
+          </div>
+          <div>
+            <h4>Conectate</h4>
+            <a href="https://wa.me/5493757533256" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://www.instagram.com/mecorentacar" target="_blank" rel="noopener">Instagram</a>
+            <a href="mailto:hola@mecorentacar.com">E-mail</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Puerto Iguazú, Misiones, Argentina · © 2026 MECO</span>
+        <div class="social">
+          <a href="https://www.instagram.com/mecorentacar" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/5493757533256" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <strong>Recibimos tu solicitud.</strong>El equipo de MECO se va a poner en contacto para confirmar disponibilidad y condiciones.
+  </div>
+
+  <script>
+    (function () {
+      const menuButton = document.getElementById('menuButton');
+      const nav = document.getElementById('mainNav');
+      const toast = document.getElementById('toast');
+      const form = document.getElementById('bookingForm');
+      const today = new Date().toISOString().split('T')[0];
+      const pickup = document.getElementById('pickup');
+      const returnDate = document.getElementById('return');
+      const loader = document.getElementById('loader');
+
+      /* ── Loader: oculta cuando TODO el contenido está cargado ── */
+      function hideLoader() {
+        loader.classList.add('hidden');
+      }
+
+      if (document.readyState === 'complete') {
+        hideLoader();
+      } else {
+        window.addEventListener('load', hideLoader, { once: true });
+      }
+
+      /* Fallback: si alguna imagen externa falla o demora demasiado,
+         aseguramos que el loader desaparezca después de un timeout razonable. */
+      setTimeout(hideLoader, 6000);
+
+      pickup.min = today;
+      returnDate.min = today;
+
+      pickup.addEventListener('change', function () {
+        returnDate.min = pickup.value || today;
+        if (returnDate.value && returnDate.value < returnDate.min) {
+          returnDate.value = returnDate.min;
+        }
+      });
+
+      menuButton.addEventListener('click', function () {
+        nav.classList.toggle('open');
+        menuButton.innerHTML = nav.classList.contains('open')
+          ? '<i class="fa-solid fa-xmark"></i>'
+          : '<i class="fa-solid fa-bars"></i>';
+      });
+
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('open');
+          menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        });
+      });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!pickup.value || !returnDate.value) return;
+
+        toast.classList.add('show');
+        setTimeout(function () {
+          toast.classList.remove('show');
+        }, 6000);
+      });
+
+      /* ── Scroll reveal (IntersectionObserver) ─────────── */
+      const reveals = document.querySelectorAll('[data-reveal]');
+
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.16,
+          rootMargin: '0px 0px -60px 0px'
+        });
+
+        reveals.forEach(function (el) {
+          revealObserver.observe(el);
+        });
+      } else {
+        /* Fallback para navegadores sin IntersectionObserver */
+        reveals.forEach(function (el) {
+          el.classList.add('is-visible');
+        });
+      }
+
+      /* Si el loader aún está visible al cargar la página,
+         disparamos la animación del hero después de ocultarlo */
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          const heroContent = document.querySelector('.hero-content');
+          if (heroContent && !heroContent.classList.contains('is-visible')) {
+            heroContent.classList.add('is-visible');
+          }
+        }, 200);
+      });
+
+    }());
+  </script>
+</body>
+</html>
